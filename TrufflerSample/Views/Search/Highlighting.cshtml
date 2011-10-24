@@ -1,0 +1,28 @@
+﻿@model TrufflerSample.Models.SearchResult
+
+@{
+    ViewBag.Title = "Highlighting";
+}
+
+<div class="page-header">
+    <h1>Highlighting <small>Search listing with keyword highlighting</small></h1>
+    <p>Try searching for "duck", "park" or "hotel" and look at for those words in the search results.</p>
+</div>
+<div class="row">
+    <div class="span14">
+    @using (Html.BeginForm())
+    {
+        @Html.TextBox("q", ViewBag.Query as string)
+        <input type="submit" value="Search" />
+    }
+    </div>
+</div>
+<div class="row">
+    <div class="span10">
+        @if (Model != null)
+        {
+            Html.RenderPartial("SearchHits");
+        }
+    </div>
+    <div class="span4"></div>
+</div>

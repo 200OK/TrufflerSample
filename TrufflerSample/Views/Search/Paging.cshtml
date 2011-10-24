@@ -6,6 +6,30 @@
 <div class="page-header">
     <h1>Paging <small>Basic search listing with paging</small></h1>
     <p>Try searching for "restaurant" to get many hits and use the paging control at the bottom of the page.</p>
+    <div class="source-link-wrap"><a id="source-link" href="#">View Source</a></div>
+    <pre id="source-code">
+int pageSize = 10;
+var page = p ?? 1;
+
+var results = client.Search<Restaurant>(Language.English)
+    .For(q)
+    .Take(pageSize)
+    .Skip((page-1) * 10)
+    .Select(x => new SearchHit
+    {
+        Title = x.Name,
+        Url = x.Website ?? x.WikipediaUrl,
+        Location = new List<string> { x.StreetAddress, x.City, x.Country }.Concatenate(", "),
+        MichelinRating = x.MichelinRating ?? 0
+    })
+    .GetResult();
+    </pre>
+    <script>
+        $("#source-link").click(function () {
+            $("#source-code").slideToggle();
+            $("#source-link").toggleClass("open");
+        });
+    </script>
 </div>
 <div class="row">
     <div class="span14">

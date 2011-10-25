@@ -12,13 +12,13 @@
     <div class="topbar">
       <div class="fill">
         <div class="container">
-          @Html.ActionLink("Truffler Sample", "Index", "Search", null, new { @class = "brand" })
+          @Html.ActionLink("Truffler Sample", "Index", "Home", null, new { @class = "brand" })
           <ul class="nav">
-            <li>@Html.ActionLink("Home", "Index", "Search")</li>
-            <li>@Html.ActionLink("Basic", "Basic", "Search")</li>
-            <li>@Html.ActionLink("Paging", "Paging", "Search")</li>
-            <li>@Html.ActionLink("Highlighting", "Highlighting", "Search")</li>
-            <li>@Html.ActionLink("Facets", "Facets", "Search")</li>
+            <li>@Html.ActionLink("Home", "Index", "Home")</li>
+            <li>@Html.ActionLink("Basic", "Index", "BasicSearch")</li>
+            <li>@Html.ActionLink("Paging", "Index", "Paging")</li>
+            <li>@Html.ActionLink("Highlighting", "Index", "Highlighting")</li>
+            <li>@Html.ActionLink("Facets", "Index", "Facets")</li>
           </ul>
         </div>
       </div>

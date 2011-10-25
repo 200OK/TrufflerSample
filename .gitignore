@@ -9,5 +9,3 @@ _ReSharper*
 *.cache
 *.ReSharper
 .DS_Store
-License.config
-build/

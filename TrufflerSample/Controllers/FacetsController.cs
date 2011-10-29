@@ -19,12 +19,15 @@ namespace TrufflerSample.Controllers
 
         public ActionResult Index(string q, string cuisine, string country, int? rating)
         {
-            if (q == null)
+            //As UrlHelper.Action doesn't add query string parameter with empty values
+            //we need to check all parameters in case the user has searched without
+            //entering a search term (he/she has just hit the search button)
+            if (q == null && cuisine == null && country == null && !rating.HasValue)
             {
                 return View();
             }
 
-            var query = client.Search<Restaurant>(Language.English)
+            var query = client.Search<Restaurant>()
                 .For(q)
                 .TermsFacetFor(x => x.Cuisine)
                 .TermsFacetFor(x => x.Country)

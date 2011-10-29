@@ -17,27 +17,6 @@
         <th>
             WikipediaUrl
         </th>
-        <th>
-            WikipediaText
-        </th>
-        <th>
-            Website
-        </th>
-        <th>
-            StreetAddress
-        </th>
-        <th>
-            City
-        </th>
-        <th>
-            MichelinRating
-        </th>
-        <th>
-            HeadChef
-        </th>
-        <th>
-            Country
-        </th>
         <th></th>
     </tr>
 
@@ -50,30 +29,7 @@
             @Html.DisplayFor(modelItem => item.WikipediaUrl)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.WikipediaText)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Website)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StreetAddress)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.City)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MichelinRating)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HeadChef)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Country)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { wikiurl = Server.UrlEncode(item.WikipediaUrl) }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            @Html.ActionLink("Edit", "Edit", new { wikiurl = Server.UrlEncode(item.WikipediaUrl) })
         </td>
     </tr>
 }

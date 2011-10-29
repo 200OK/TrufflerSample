@@ -1,4 +1,5 @@
-﻿@model TrufflerSample.Models.Restaurant
+﻿@using Truffler.Helpers.Text
+@model TrufflerSample.Models.Restaurant
 
 @{
     ViewBag.Title = "Edit";
@@ -108,6 +109,13 @@
         <div class="editor-field">
             @Html.EditorFor(model => model.Coordinates.Longitude)
             @Html.ValidationMessageFor(model => model.Coordinates.Longitude)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Tags)
+        </div>
+        <div class="editor-field">
+            @Html.TextBox("tags", Model.Tags.Concatenate(","))
         </div>
 
         <p>

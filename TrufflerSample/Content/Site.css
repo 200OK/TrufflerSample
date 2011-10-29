@@ -5,6 +5,11 @@ html, body {
 body {
     padding-top: 40px; /* 40px to make the container go all the way to the bottom of the topbar */
 }
+
+.row {
+    margin-bottom: 10px;
+}
+
 .container > footer p {
     text-align: center; /* center align it with the container */
 }
@@ -148,4 +153,14 @@ ol {
 
 .source-code .visible {
     display: block;
+}
+
+.ui-multiselect-checkboxes label {
+    text-align: left;
+    width: auto;
+    float: none;
+}
+
+.ui-multiselect-checkboxes span {
+    margin-left: 5px;
 }

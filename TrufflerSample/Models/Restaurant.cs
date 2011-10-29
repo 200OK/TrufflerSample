@@ -1,10 +1,16 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using Truffler;
 
 namespace TrufflerSample.Models
 {
     public class Restaurant
     {
+        public Restaurant()
+        {
+            Tags = new List<string>();
+        }
+
         [Required]
         public string Name { get; set; }
 
@@ -30,5 +36,7 @@ namespace TrufflerSample.Models
         public GeoLocation Coordinates { get; set; }
         
         public string Country { get; set; }
+
+        public IList<string> Tags { get; set; }
     }
 }

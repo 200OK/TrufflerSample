@@ -22,7 +22,7 @@ namespace TrufflerSample.Controllers
                 return View();
             }
 
-            var results = client.Search<Restaurant>(Language.English)
+            var results = client.Search<Restaurant>()
                 .For(q)
                 .Select(x => new SearchHit
                 {

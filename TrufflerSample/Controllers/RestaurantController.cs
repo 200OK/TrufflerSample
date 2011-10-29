@@ -5,6 +5,8 @@ using TrufflerSample.Models;
 
 namespace TrufflerSample.Controllers
 {
+    //This controller illustrates how restaurants could be added and updated.
+    //However, it won't work as the URL in web.config is read-only.
     public class RestaurantController : Controller
     {
         IClient client;
@@ -14,33 +16,16 @@ namespace TrufflerSample.Controllers
             this.client = client;
         }
 
-        //
-        // GET: /Restaurant/
-
         public ActionResult Index()
         {
-            var restaurants = client.Search<Restaurant>().GetResult();
+            var restaurants = client.Search<Restaurant>().Take(100).GetResult();
             return View(restaurants);
         }
-
-        //
-        // GET: /Restaurant/Details/5
-
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        //
-        // GET: /Restaurant/Create
 
         public ActionResult Create()
         {
             return View();
         } 
-
-        //
-        // POST: /Restaurant/Create
 
         [HttpPost]
         public ActionResult Create(FormCollection collection, Restaurant newRestaurant)
@@ -55,54 +40,25 @@ namespace TrufflerSample.Controllers
             return RedirectToAction("Index");
         }
         
-        //
-        // GET: /Restaurant/Edit/5
-
         public ActionResult Edit(string wikiurl)
         {
             return View(client.Get<Restaurant>(Server.UrlDecode(wikiurl)));
         }
 
-        //
-        // POST: /Restaurant/Edit/5
-
         [HttpPost]
-        public ActionResult Edit(string wikiurl, FormCollection collection, Restaurant restaurant)
+        public ActionResult Edit(string wikiurl, FormCollection collection, Restaurant restaurant, string tags)
         {
             if (!ModelState.IsValid)
             {
                 return View(restaurant);
             }
-
+            if (!string.IsNullOrWhiteSpace(tags))
+            {
+                restaurant.Tags = tags.Split(',').Select(x => x.Trim()).ToList();
+            }
             client.Index(restaurant);
 
             return RedirectToAction("Index");
-        }
-
-        //
-        // GET: /Restaurant/Delete/5
- 
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        //
-        // POST: /Restaurant/Delete/5
-
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
- 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
         }
     }
 }

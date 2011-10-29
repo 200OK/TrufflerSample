@@ -17,7 +17,7 @@ namespace TrufflerSample.Controllers
 
         public ActionResult Index(string q, int? p)
         {
-            if (q == null)
+            if (q == null && !p.HasValue)
             {
                 return View();
             }
@@ -25,7 +25,7 @@ namespace TrufflerSample.Controllers
             int pageSize = 10;
             var page = p ?? 1;
 
-            var results = client.Search<Restaurant>(Language.English)
+            var results = client.Search<Restaurant>()
                 .For(q)
                 .Take(pageSize)
                 .Skip((page-1) * 10)

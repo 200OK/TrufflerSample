@@ -11,13 +11,15 @@
         .Add("~/Content/themes/base/jquery.ui.theme.css")
         .Add("~/Content/themes/base/jquery.ui.autocomplete.css")
         .Add("~/Content/jquery.multiselect.css")
+        .ForceDebug()
         .Render("~/combined_#.css"))
 
     @Html.Raw(Bundle.JavaScript()
             .Add("~/Scripts/jquery-1.5.1.min.js")
             .Add("~/Scripts/jquery-ui-1.8.11.min.js")
             .Add("~/Scripts/jquery.multiselect.min.js")
-            .Render("~/conbined_#.js"))
+            .ForceDebug()
+            .Render("~/conbined.js"))
 
 </head>
 

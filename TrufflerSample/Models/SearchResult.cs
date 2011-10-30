@@ -22,28 +22,4 @@ namespace TrufflerSample.Models
 
         public IEnumerable<FacetResult> Facets { get; set; }
     }
-
-    public class FacetLink
-    {
-        public string Text { get; set; }
-
-        public int Count { get; set; }
-
-        public string Url { get; set; }
-
-        public string CssClass { get; set; }
-    }
-
-    public class FacetResult
-    {
-        public FacetResult(string name, IEnumerable<FacetLink> links)
-        {
-            Name = name;
-            Links = links;
-        }
-
-        public string Name { get; private set; }
-
-        public IEnumerable<FacetLink> Links { get; private set; }
-    }
 }

@@ -73,6 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\BasicSearchController.cs" />
+    <Compile Include="Controllers\SortingController.cs" />
     <Compile Include="Controllers\FilteringController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HighlightingController.cs" />
@@ -82,8 +83,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\FilteringSearchModel.cs" />
+    <Compile Include="Models\FacetLink.cs" />
+    <Compile Include="Models\FacetResult.cs" />
     <Compile Include="Models\GeoLocationModelBinder.cs" />
+    <Compile Include="Models\Link.cs" />
     <Compile Include="Models\Restaurant.cs" />
     <Compile Include="Models\SearchHit.cs" />
     <Compile Include="Models\SearchResult.cs" />
@@ -212,6 +215,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Paging\SourceCode.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Sorting\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Sorting\SourceCode.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

@@ -34,5 +34,13 @@
             @RenderBody()
         </div>
     </div>
+
+    @if (System.Configuration.ConfigurationManager.AppSettings["statsCode"] != null)
+    {
+        var statsCode = System.Configuration.ConfigurationManager.AppSettings["statsCode"];
+        <script src="//static.getclicky.com/js" type="text/javascript"></script>
+        <script type="text/javascript">    try { clicky.init(@Html.Raw(statsCode)); } catch (e) { }</script>
+        <noscript><p><img alt="Clicky" width="1" height="1" src="//in.getclicky.com/@Html.Raw(statsCode)ns.gif" /></p></noscript>
+    }
 </body>
 </html>

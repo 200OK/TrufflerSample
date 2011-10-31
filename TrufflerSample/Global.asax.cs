@@ -31,6 +31,9 @@ namespace TrufflerSample
 
         protected void Application_Start()
         {
+            ViewEngines.Engines.Clear();
+            ViewEngines.Engines.Add(new RazorViewEngine());
+
             var builder = new ContainerBuilder();
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
             builder.Register(x => Client.CreateFromConfig()).As<IClient>().SingleInstance();

@@ -1,9 +1,9 @@
-﻿using System.Web.Mvc;
+﻿using System.Reflection;
+using System.Web.Mvc;
 using System.Web.Routing;
 using Autofac;
 using Autofac.Integration.Mvc;
 using Truffler;
-using TrufflerSample.Models;
 
 namespace TrufflerSample
 {
@@ -36,11 +36,11 @@ namespace TrufflerSample
 
             var builder = new ContainerBuilder();
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
+            builder.RegisterModelBinders(Assembly.GetExecutingAssembly());
+            builder.RegisterModelBinderProvider();
             builder.Register(x => Client.CreateFromConfig()).As<IClient>().SingleInstance();
             var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
-
-            ModelBinders.Binders.Add(typeof(GeoLocation), new GeoLocationModelBinder());
 
             AreaRegistration.RegisterAllAreas();
 

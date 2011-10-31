@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <title>@ViewBag.Title</title>
-    @Html.Raw(Bundle.Css()
+    @MvcHtmlString.Create(Bundle.Css()
         .Add("~/Content/bootstrap.min.css")
         .Add("~/Content/site.css")
         .Add("~/Content/themes/base/jquery.ui.core.css")
@@ -13,11 +13,12 @@
         .Add("~/Content/jquery.multiselect.css")
         .Render("~/combined_#.css"))
 
-    @Html.Raw(Bundle.JavaScript()
+    @MvcHtmlString.Create(Bundle.JavaScript()
             .Add("~/Scripts/jquery-1.5.1.min.js")
             .Add("~/Scripts/jquery-ui-1.8.11.min.js")
             .Add("~/Scripts/jquery.multiselect.min.js")
-            .Render("~/conbined_#.js"))
+            .ForceDebug()
+            .Render("~/combined_#.js"))
 
 </head>
 

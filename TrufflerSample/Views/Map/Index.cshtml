@@ -1,0 +1,88 @@
+﻿@{
+    ViewBag.Title = "Map search";
+}
+<div class="page-header">
+    <h1>Map search <small>Search by drawing a polygon on a map</small></h1>
+    <p>Find restaurants within a given area by clicking in the map to add points that form an area. Adjust the area by dragging the points. Try an area in England for many hits.</p>
+</div>
+<div class="row">
+    <div class="span14">
+        <div id="map" style="width: 815px; height: 350px"></div>
+    </div>
+</div>
+<div class="row">
+    <div class="span10" id="hits-area">
+    </div>
+    <div class="span4"></div>
+</div>
+
+<script src="http://maps.google.com/maps?file=api&v=2"
+      type="text/javascript"></script>
+
+<script type="text/javascript">
+    var COLORS = [["red", "#ff0000"], ["orange", "#ff8800"], ["green", "#008000"],
+            ["blue", "#000080"], ["purple", "#800080"]];
+    var options = {};
+    var colorIndex_ = 0;
+    var map;
+
+    function getColor(named) {
+        return COLORS[(colorIndex_++) % COLORS.length][named ? 0 : 1];
+    }
+
+    function getIcon(color) {
+        var icon = new GIcon();
+        icon.image = "http://google.com/mapfiles/ms/micons/" + color + ".png";
+        icon.iconSize = new GSize(32, 32);
+        icon.iconAnchor = new GPoint(15, 32);
+        return icon;
+    }
+
+    function startShape() {
+        var color = getColor(false);
+        var polygon = new GPolygon([], color, 2, 0.7, color, 0.2);
+        startDrawing(polygon);
+    }
+
+    function startDrawing(polygon) {
+        map.addOverlay(polygon);
+        polygon.enableDrawing(options);
+        polygon.enableEditing({ onEvent: "mouseover" });
+        polygon.disableEditing({ onEvent: "mouseout" });
+        GEvent.addListener(polygon, "lineupdated", function () {
+            if (polygon.getVertexCount() >= 3) {
+                var vertexes = "";
+                for (var i = 0; i < polygon.getVertexCount(); i++) {
+                    if (i > 0) {
+                        vertexes += ";";
+                    }
+                    vertexes += polygon.getVertex(i).lat() + "," + polygon.getVertex(i).lng();
+                }
+                $('#hits-area').html('<img src="/content/img/loading.gif"/>');
+                $.get("/map/filter/?vertexes=" + vertexes, function (response) {
+                    $('#hits-area').html(response);
+                });
+            }
+        });
+        GEvent.addListener(polygon, "click", function (latlng, index) {
+            if (typeof index == "number") {
+                polygon.deleteVertex(index);
+            }
+        });
+    }
+
+    function initialize() {
+        if (GBrowserIsCompatible()) {
+            map = new GMap2(document.getElementById("map"));
+            map.setCenter(new GLatLng(54.57206, 8.87695), 4);
+            map.addControl(new GSmallMapControl());
+            map.addControl(new GMapTypeControl());
+            map.clearOverlays();
+        }
+    }
+
+    initialize();
+
+    startShape();
+        
+</script>

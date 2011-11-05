@@ -16,8 +16,16 @@
     <div class="span4"></div>
 </div>
 
-<script src="http://maps.google.com/maps?file=api&v=2"
-      type="text/javascript"></script>
+@if (System.Configuration.ConfigurationManager.AppSettings["mapsApiKey"] != null)
+{
+    <script src="http://maps.google.com/maps?file=api&v=2&key=@Html.Raw(System.Configuration.ConfigurationManager.AppSettings["mapsApiKey"])"
+          type="text/javascript"></script>
+}
+else
+{
+    <script src="http://maps.google.com/maps?file=api&v=2"
+            type="text/javascript"> </script>
+}
 
 <script type="text/javascript">
     var COLORS = [["red", "#ff0000"], ["orange", "#ff8800"], ["green", "#008000"],

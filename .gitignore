@@ -8,4 +8,5 @@ _ReSharper*
 *.suo
 *.cache
 *.ReSharper
+combined*.css
 .DS_Store

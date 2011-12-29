@@ -39,6 +39,8 @@ namespace TrufflerSample.Controllers
                 .GetResult();
 
             ViewBag.Query = q;
+            ViewBag.Id = results.ProcessingInfo.ServerDuration;
+            ViewBag.Hits = results.TotalMatching;
 
             var totalPages = results.TotalMatching/pageSize;
             if (results.TotalMatching % pageSize > 0)

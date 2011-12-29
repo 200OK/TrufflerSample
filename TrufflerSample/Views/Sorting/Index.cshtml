@@ -34,3 +34,11 @@
     </div>
     <div class="span4"></div>
 </div>
+<script type="text/javascript">
+    var hits = @Html.Raw(Json.Encode(ViewBag.Hits)) ;
+    var query = @Html.Raw(Json.Encode(ViewBag.Query)) ;
+    if(query!=null) {
+        document.onload = EnableTrufflerStats('http://truffler-stats-1490391958.eu-west-1.elb.amazonaws.com/TRACK/track/', { q: query , hits: hits});
+    }
+    
+</script>

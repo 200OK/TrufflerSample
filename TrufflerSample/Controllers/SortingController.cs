@@ -84,6 +84,8 @@ namespace TrufflerSample.Controllers
             .GetResult();
 
             ViewBag.Query = q;
+            ViewBag.Id = results.ProcessingInfo.ServerDuration;
+            ViewBag.Hits = results.TotalMatching;
 
             return View(new SearchResult(results, q));
         }

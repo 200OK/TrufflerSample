@@ -59,6 +59,8 @@ namespace TrufflerSample.Controllers
                 .GetResult();
 
             ViewBag.Query = q;
+            ViewBag.Id = results.ProcessingInfo.ServerDuration;
+            ViewBag.Hits = results.TotalMatching;
             
             //Groups of links for each facet
             var facets = new List<FacetResult>();

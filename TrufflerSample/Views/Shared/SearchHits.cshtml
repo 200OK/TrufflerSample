@@ -8,7 +8,7 @@
 {
     <li>
         <h3>
-            <a href="@hit.Url">@Html.Raw(hit.Title)</a>
+            <a href="@hit.Url" data-ts="">@Html.Raw(hit.Title)</a>
             @for (int i = 0; i < hit.MichelinRating; i++)
             {
                 <span class="michelin-star"></span>

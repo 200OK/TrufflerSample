@@ -30,26 +30,24 @@ function ClickTracking(query) {
             aItem.setAttribute("data-ts", querystring);
             aItem.onclick = function () {
                 var querystring = this.getAttribute("data-ts");
-                var object = { id: id, hit: getQuerystring("hit", querystring), pos: getQuerystring("hit.pos", querystring), url: getQuerystring("hit.url", querystring), name: getQuerystring("hit.name", querystring), q: getQuerystring("q", querystring) };
+                //                var object = {id:id, hit: getQuerystring("hit", querystring), pos: getQuerystring("hit.pos", querystring), url: getQuerystring("hit.url", querystring), name: getQuerystring("hit.name", querystring), q: getQuerystring("q", querystring) };
                 var url = savedurl;
                 try {
-                    //SendStatsObject(url, object);
-                                        if ($.browser.msie && window.XDomainRequest) {
-                                            // Use Microsoft XDR
+                    if ($.browser.msie && window.XDomainRequest) {
+                        // Use Microsoft XDR
+                        var req = new XDomainRequest();
+                    }
+                    else if (window.XMLHttpRequest) {
+                        //var querystring = this.dataset.ts;
+                        var req = new XMLHttpRequest();
+                    }
+                    else {
 
-                                            var req = new XDomainRequest();
-                                        }
-                                        else if (window.XMLHttpRequest) {
-                                            //var querystring = this.dataset.ts;
-                                            var req = new XMLHttpRequest();
-                                        }
-                                        else {
-
-                                            //var querystring = this.dataset.ts;
-                                            var req = new ActiveXObject("Microsoft.XMLHTTP");
-                                        }
-                                        req.open("GET", encodeURI(url + querystring), false);
-                                        req.send();
+                        //var querystring = this.dataset.ts;
+                        var req = new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                    req.open("GET", encodeURI(url + querystring), false);
+                    req.send();
                 } catch (err) {
                     console.log(err);
                 }
@@ -60,8 +58,7 @@ function ClickTracking(query) {
     }
 }
 
-
-function EnableTrufflerStats(url, statsObject) {
+function StartTrufflerStats(url, statsObject) {
     savedurl = url;
     var prevSearch = getCookie("trufflerstats");
     if (prevSearch == null || prevSearch != query) {
@@ -81,9 +78,33 @@ function EnableTrufflerStats(url, statsObject) {
     }
 }
 
+function EnableTrufflerStats(key,statsObject,url) {
+    EnableTrufflerStats(url, statsObject);
+}
+
+function StartTrufflerStats(url, statsObject) {
+    window.onload = function () {
+        savedurl = url;
+        var prevSearch = getCookie("trufflerstats");
+        if (prevSearch == null || prevSearch != query) {
+            if (statsObject.q != null) {
+                //Need new Id for this.
+                id = Math.floor(Math.random() * 100000000);
+                SendStatsObject(savedurl, statsObject);
+                setCookie("trufflerstats", query);
+                setCookie("trufflerid", id);
+                ClickTracking(statsObject.q);
+            }
+            //ELSE Can't send anything..
+        }
+        else if (statsObject.q != null) {
+            id = getCookie("trufflerid");
+            ClickTracking(statsObject.q);
+        }
+    }
+}
+
 function SendStatsObject(url, statsObject) {
-
-
     if ($.browser.msie && window.XDomainRequest) {
         // Use Microsoft XDR
         var req = new XDomainRequest();

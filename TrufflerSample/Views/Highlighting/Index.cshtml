@@ -1,9 +1,16 @@
-﻿@model TrufflerSample.Models.SearchResult
+﻿
+@model TrufflerSample.Models.SearchResult
 
 @{
     ViewBag.Title = "Highlighting";
 }
-
+<script type="text/javascript">
+    var hits = @Html.Raw(Json.Encode(ViewBag.Hits)) ;
+    var query = @Html.Raw(Json.Encode(ViewBag.Query)) ;
+    if(query!=null) {
+        EnableTrufflerStats('http://stats.truffler.net/hDP934M6xzvJAga321oVLOMEVTG4uEF2/track/', { q: query , hits: hits});
+    }
+</script>
 <div class="page-header">
     <h1>Highlighting <small>Search listing with keyword highlighting</small></h1>
     <p>Try searching for "duck", "park" or "hotel" and look at for those words in the search results.</p>
@@ -29,10 +36,6 @@
     </div>
     <div class="span4"></div>
 </div>
-<script type="text/javascript">
-    var hits = @Html.Raw(Json.Encode(ViewBag.Hits)) ;
-    var query = @Html.Raw(Json.Encode(ViewBag.Query)) ;
-    if(query!=null) {
-        document.onload = EnableTrufflerStats('http://truffler-stats-1490391958.eu-west-1.elb.amazonaws.com/TRACK/track/', { q: query , hits: hits});
-    }
-</script>
+
+
+

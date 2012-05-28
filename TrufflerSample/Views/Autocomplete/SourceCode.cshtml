@@ -2,7 +2,7 @@
     <pre id="source-code">
 public JsonResult Prefix(string term)
 {
-    var results = client.Search<Restaurant>()
+    var results = client.Search&lt;Restaurant&gt;()
         .Filter(x => x.Name.PrefixCaseInsensitive(term))
         .Select(x => x.Name)
         .StaticallyCacheFor(TimeSpan.FromHours(1))

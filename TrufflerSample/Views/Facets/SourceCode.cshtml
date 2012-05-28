@@ -1,6 +1,6 @@
 ﻿<div class="source-link-wrap"><a id="source-link" href="#">View Source</a></div>
-    <pre id="source-code">
-var query = client.Search<Restaurant>()
+<pre id="source-code">
+var query = client.Search&lt;Restaurant&gt;()
     .For(q)
     .TermsFacetFor(x => x.Cuisine)
     .TermsFacetFor(x => x.Country)
@@ -26,7 +26,7 @@ var results = query.Select(x => new SearchHit
     {
         Title = !string.IsNullOrEmpty(x.Name.AsHighlighted()) ? x.Name.AsHighlighted() : x.Name,
         Url = x.Website ?? x.WikipediaUrl,
-        Location = new List<string> { x.StreetAddress, x.City, x.Country }.Concatenate(", "),
+        Location = new List&lt;string&gt; { x.StreetAddress, x.City, x.Country }.Concatenate(", "),
         MichelinRating = x.MichelinRating ?? 0
     })
     .GetResult();

@@ -91,7 +91,7 @@ namespace TrufflerSample.Controllers
                 {
                     Text = "",
                     CssClass = "stars-" + x.Key,
-                    Count = x.Value,
+                    Count = x.Count ,
                     Url = Url.Action("Index", new { q, cuisine, country, rating = x.Key })
                 }));
             facets.Add(ratingFacetLinks);
